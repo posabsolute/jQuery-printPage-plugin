@@ -24,7 +24,7 @@ There is some options available:
       message:"Your document is being created"
     })
 
-To be a little more specific, if you declare a url it will not look for the url in the attribut and directly use this one.
+To be a little more specific, if you declare a url it will not look in the attribut and directly use this one.
 
 ##Tested on:
 Firefox 3.6
