@@ -7,6 +7,8 @@ Typically you would create a special print template, open it in a popup and then
 
 Also, because you still actually link to your popup, if some of your users have javascript disabled, they could still open the special template and print it.
 
+Example: http://www.position-absolute.com/creation/print/
+
 ##Using it
 
     $(".btnPrint").printPage()
