@@ -48,11 +48,25 @@
     /*
      * Call the print browser functionnality, focus is needed for IE
      */
-    function printit(){
-      frames["printPage"].focus();
-      frames["printPage"].print();
-      unloadMessage();
-    }
+    function printit() {
+  		frames["printPage"].focus();
+
+			frames["printPage"].document.body.insertAdjacentHTML('beforeEnd', '<object ID="PrintCommandObject" WIDTH=0 HEIGHT=0 CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></object>');
+
+			if (navigator.appName == "Microsoft Internet Explorer" && frames["printPage"].PrintCommandObject) {
+				try {
+					frames["printPage"].PrintCommandObject.ExecWB(6, 2);
+					frames["printPage"].PrintCommandObject.outerHTML = "";
+				}
+				catch (e) {
+					frames["printPage"].print();
+				}
+			} else {
+				frames["printPage"].print();
+			}
+
+			unloadMessage();
+		}
     /*
      * Hide & Delete the message box with a small delay
      */
