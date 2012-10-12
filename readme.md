@@ -1,4 +1,3 @@
-
 #jQuery printPage plugin
 
 Print any page within your website without quitting your page.
@@ -34,3 +33,5 @@ IE 7&8
 Chrome latest
 
 ** I use a data url background image and some CSS3 properties for the little warning box, you might want to have a look if you care about IE
+
+[![endorse](http://api.coderwall.com/posabsolute/endorsecount.png)](http://coderwall.com/posabsolute)
