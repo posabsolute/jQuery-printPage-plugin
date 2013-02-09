@@ -66,7 +66,7 @@
      */
     var components = {
       iframe: function(url){
-        return '<iframe id="printPage" name="printPage" src='+url+' style="position:absolute;top:-9999px;left:-9999px;border:0px;overflow:none; z-index:-1"></iframe>';
+        return '<iframe id="printPage" name="printPage" src='+url+' style="display: none; @media print { display: block; }"></iframe>';
       },
       messageBox: function(message){
         return "<div id='printMessageBox' style='\
