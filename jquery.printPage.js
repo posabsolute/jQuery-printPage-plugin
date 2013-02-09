@@ -16,7 +16,7 @@
     };
     $.extend(pluginOptions, options);
 
-    this.live("click", function(){  loadPrintDocument(this, pluginOptions); return false;  });
+    this.on("click", function(){  loadPrintDocument(this, pluginOptions); return false;  });
     
     /**
      * Load & show message box, call iframe
