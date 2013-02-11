@@ -12,6 +12,7 @@
     var pluginOptions = {
       attr : "href",
       url : false,
+      showMessage: true,
       message: "Please wait while we create your document" 
     };
     $.extend(pluginOptions, options);
@@ -24,9 +25,13 @@
      * @param {Object} pluginOptions - options for this print button
      */   
     function loadPrintDocument(el, pluginOptions){
+      if(pluginOption.showMessage){
       $("body").append(components.messageBox(pluginOptions.message));
       $("#printMessageBox").css("opacity", 0);
       $("#printMessageBox").animate({opacity:1}, 300, function() { addIframeToPage(el, pluginOptions); });
+      } else {
+        addIframeToPage(el, pluginOptions);
+      }
     }
     /**
      * Inject iframe into document and attempt to hide, it, can't use display:none
@@ -40,7 +45,7 @@
 
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
-          $('#printPage').bind("load",function() {  printit();  })
+          $('#printPage').bind("load",function() {  printit(pluginOptions);  })
         }else{
           $('#printPage').attr("src", url);
         }
@@ -51,7 +56,9 @@
     function printit(){
       frames["printPage"].focus();
       frames["printPage"].print();
-      unloadMessage();
+      if(pluginOption.showMessage){
+        unloadMessage();
+      }
     }
     /*
      * Hide & Delete the message box with a small delay
