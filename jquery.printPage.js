@@ -25,7 +25,7 @@
      * @param {Object} pluginOptions - options for this print button
      */   
     function loadPrintDocument(el, pluginOptions){
-      if(pluginOption.showMessage){
+      if(pluginOptions.showMessage){
       $("body").append(components.messageBox(pluginOptions.message));
       $("#printMessageBox").css("opacity", 0);
       $("#printMessageBox").animate({opacity:1}, 300, function() { addIframeToPage(el, pluginOptions); });
@@ -56,7 +56,7 @@
     function printit(){
       frames["printPage"].focus();
       frames["printPage"].print();
-      if(pluginOption.showMessage){
+      if(pluginOptions.showMessage){
         unloadMessage();
       }
     }
