@@ -1,0 +1,24 @@
+{
+    "name": "printpage",
+    "title": "Page Printer",
+    "description": "Print any page within your website without quitting your page.",
+    "keywords": [
+        "print"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Cedric Dugas",
+        "url": "http://www.position-relative.net"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/posabsolute/jQuery-printPage-plugin/issues",
+    "homepage": "https://github.com/posabsolute/jQuery-printPage-plugin",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}

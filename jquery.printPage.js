@@ -16,7 +16,7 @@
     };
     $.extend(pluginOptions, options);
 
-    this.live("click", function(){  loadPrintDocument(this, pluginOptions); return false;  });
+    this.on("click", function(){  loadPrintDocument(this, pluginOptions); return false;  });
     
     /**
      * Load & show message box, call iframe
@@ -40,7 +40,7 @@
 
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
-          $('#printPage').bind("load",function() {  printit();  })
+          $('#printPage').on("load",function() {  printit();  })
         }else{
           $('#printPage').attr("src", url);
         }

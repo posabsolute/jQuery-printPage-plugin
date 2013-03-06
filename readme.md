@@ -3,9 +3,9 @@
 
 Print any page within your website without quitting your page.
 
-Typically you would create a special print template, open it in a popup and then call window.print().This plugin take the page you want to print, put it in an iframe and print it without the need of a popup
+Typically you would create a special print template, open it in a popup and then call window.print().This plugin take the page you want to print, put it in an iframe and print it without the need of a popup.
 
-Also, because you still actually link to your popup, if some of your users have javascript disabled, they could still open the special template and print it.
+Also, because you still actually link to your popup, if some of your users have javascript disabled, they could still open the special template and print it. *Must be on the same server*
 
 Example: http://www.position-absolute.com/creation/print/
 
