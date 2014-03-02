@@ -13,11 +13,13 @@
       attr : "href",
       url : false,
       showMessage: true,
-      message: "Please wait while we create your document" 
+      message: "Please wait while we create your document" ,
+      callback: null
     };
     $.extend(pluginOptions, options);
 
-    this.on("click", function(){  loadPrintDocument(this, pluginOptions); return false;  });
+    this.on("click", 
+    function(){  loadPrintDocument(this, pluginOptions); return false;  });
     
     /**
      * Load & show message box, call iframe
@@ -59,6 +61,12 @@
       if(pluginOptions.showMessage){
         unloadMessage();
       }
+      
+      if($.isFunction(pluginOptions.callback))
+      {
+          $.call(this,pluginOptions.callback);
+      }
+      
     }
     /*
      * Hide & Delete the message box with a small delay
@@ -73,7 +81,8 @@
      */
     var components = {
       iframe: function(url){
-        return '<iframe id="printPage" name="printPage" src='+url+' style="display: none; @media print { display: block; }"></iframe>';
+          return '<iframe id="printPage" name="printPage" src='+url+' style="display: none; @media print { display: block; }"></iframe>';
+       
       },
       messageBox: function(message){
         return "<div id='printMessageBox' style='\
