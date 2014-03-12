@@ -56,8 +56,8 @@
      * Call the print browser functionnality, focus is needed for IE
      */
     function printit(){
-      frames["printPage"].focus();
-      frames["printPage"].print();
+      frames.printPage.focus();
+      frames.printPage.print();
       if(pluginOptions.showMessage){
         unloadMessage();
       }
