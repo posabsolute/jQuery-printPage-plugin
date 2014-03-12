@@ -47,7 +47,7 @@
 
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
-          $('#printPage').on("load",function() {  printit(pluginOptions);  })
+          $('#printPage').on("load",function() {  printit(pluginOptions);  });
         }else{
           $('#printPage').attr("src", url);
         }
@@ -98,6 +98,6 @@
           box-shadow:0px 0px 10px #888; -webkit-box-shadow:0px 0px 10px #888; -moz-box-shadow:0px 0px 10px #888'>\
           "+message+"</div>";
       }
-    }
+    };
   };
 })( jQuery );
