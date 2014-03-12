@@ -47,7 +47,7 @@
 
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
-          $('#printPage').on("load",function() {  printit(pluginOptions);  })
+          $('#printPage').on("load",function() {  printit(pluginOptions);  });
         }else{
           $('#printPage').attr("src", url);
         }
