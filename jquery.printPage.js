@@ -81,7 +81,7 @@
      */
     var components = {
       iframe: function(url){
-          return '<iframe id="printPage" name="printPage" src='+url+' style="display: none; @media print { display: block; }"></iframe>';
+          return '<iframe id="printPage" name="printPage" src='+url+' style="position: absolute; top: -1000px; @media print { display: block; }"></iframe>';
        
       },
       messageBox: function(message){
