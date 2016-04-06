@@ -44,7 +44,10 @@
     function addIframeToPage(el, pluginOptions){
 
         var url = (pluginOptions.url) ? pluginOptions.url : $(el).attr(pluginOptions.attr);
-
+        _this.settings.id = (pluginOptions.id) ? pluginOptions.id : $(el).attr('id');
+			  if (_this.settings.id == 'undefined')
+				    _this.settings.id = '';
+				    
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
           $('#printPage').on("load",function() {  printit(pluginOptions);  });
@@ -56,6 +59,9 @@
      * Call the print browser functionnality, focus is needed for IE
      */
     function printit(){
+      
+      var selector = 'printPage' + pluginOptions.id;
+      
       frames.printPage.focus();
       frames.printPage.print();
       if(pluginOptions.showMessage){
@@ -81,7 +87,7 @@
      */
     var components = {
       iframe: function(url){
-          return '<iframe id="printPage" name="printPage" src='+url+' style="position: absolute; top: -1000px; @media print { display: block; }"></iframe>';
+          return '<iframe id="printPage'+pluginOptions.id+'" name="printPage'+pluginOptions.id+'" src='+url+' style="position: absolute; top: -1000px; @media print { display: block; }"></iframe>';
        
       },
       messageBox: function(message){
