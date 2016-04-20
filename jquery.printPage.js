@@ -44,9 +44,9 @@
     function addIframeToPage(el, pluginOptions){
 
         var url = (pluginOptions.url) ? pluginOptions.url : $(el).attr(pluginOptions.attr);
-        _this.settings.id = (pluginOptions.id) ? pluginOptions.id : $(el).attr('id');
-			  if (_this.settings.id == 'undefined')
-				    _this.settings.id = '';
+        pluginOptions.id = (pluginOptions.id) ? pluginOptions.id : $(el).attr('id');
+			  if (pluginOptions.id == 'undefined')
+				    pluginOptions.id = '';
 				    
         if(!$('#printPage')[0]){
           $("body").append(components.iframe(url));
