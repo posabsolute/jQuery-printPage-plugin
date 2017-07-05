@@ -6,54 +6,60 @@
  * @desciption: jQuery page print plugin help you print your page in a better way
  */
 
-(function( $ ){
-  $.fn.printPage = function(options) {
-    // EXTEND options for this button
+(function ($) {
     var pluginOptions = {
-      attr : "href",
-      url : false,
-      showMessage: true,
-      message: "Please wait while we create your document" ,
-      afterCallback: null,
-      beforeCallBack: null,
-      urlCallBack: false
+        attr: "href",
+        url: false,
+        showMessage: true,
+        message: "Please wait while we create your document",
+        afterCallback: null,
+        beforeCallBack: null,
+        urlCallBack: false
     };
-    $.extend(pluginOptions, options);
+    
+    $.fn.printPage = function (options) {
 
-    this.on("click",
-    function(){  loadPrintDocument(this, pluginOptions); return false;  });
+        $.extend(pluginOptions, options);
+
+        this.on("click", function () {
+            loadPrintDocument(this, pluginOptions);
+            return false;
+        });
+    };
 
     /**
      * Load & show message box, call iframe
      * @param {jQuery} el - The button calling the plugin
      * @param {Object} pluginOptions - options for this print button
      */
-    function loadPrintDocument(el, pluginOptions){
-      if($.isFunction(pluginOptions.beforeCallback))
-      {
-          $.call(this,pluginOptions.beforeCallback);
-      }
-      if(pluginOptions.showMessage){
-      $("body").append(components.messageBox(pluginOptions.message));
-      $("#printMessageBox").css("opacity", 0);
-      $("#printMessageBox").animate({opacity:1}, 300, function() { addIframeToPage(el, pluginOptions); });
-      } else {
-        addIframeToPage(el, pluginOptions);
-      }
+    function loadPrintDocument(el, pluginOptions) {
+        if ($.isFunction(pluginOptions.beforeCallback))
+        {
+            $.call(this, pluginOptions.beforeCallback);
+        }
+        if (pluginOptions.showMessage) {
+            $("body").append(components.messageBox(pluginOptions.message));
+            $("#printMessageBox").css("opacity", 0);
+            $("#printMessageBox").animate({opacity: 1}, 300, function () {
+                addIframeToPage(el, pluginOptions);
+            });
+        } else {
+            addIframeToPage(el, pluginOptions);
+        }
     }
 
-      /**
-       * Fire function to getting print url if is defined in options
-       *
-       * @param {jQuery} el - The button calling the plugin
-       * @param {Object} pluginOptions - options for this print button
-       */
+    /**
+     * Fire function to getting print url if is defined in options
+     *
+     * @param {jQuery} el - The button calling the plugin
+     * @param {Object} pluginOptions - options for this print button
+     */
     function getURL(el, pluginOptions) {
-      if ($.isFunction(pluginOptions.urlCallBack)) {
-        return pluginOptions.urlCallBack();
-      } else {
-        return (pluginOptions.url) ? pluginOptions.url : $(el).attr(pluginOptions.attr);
-      }
+        if ($.isFunction(pluginOptions.urlCallBack)) {
+            return pluginOptions.urlCallBack();
+        } else {
+            return (pluginOptions.url) ? pluginOptions.url : $(el).attr(pluginOptions.attr);
+        }
     }
 
     /**
@@ -62,57 +68,60 @@
      * @param {jQuery} el - The button calling the plugin
      * @param {Object} pluginOptions - options for this print button
      */
-    function addIframeToPage(el, pluginOptions){
+    function addIframeToPage(el, pluginOptions) {
 
         var url = getURL(el, pluginOptions);
         pluginOptions.id = (pluginOptions.id) ? pluginOptions.id : $(el).attr('id');
-			  if (pluginOptions.id == 'undefined')
-				    pluginOptions.id = '';
+        if (pluginOptions.id === 'undefined')
+            pluginOptions.id = '';
 
-        if(!$('#printPage')[0]){
-          $("body").append(components.iframe(url));
-          $('#printPage').on("load",function() {  printit(pluginOptions);  });
-        }else{
-          $('#printPage').attr("src", url);
+        var selector = '#printPage' + pluginOptions.id;
+        if (!$(selector)[0]) {
+            $("body").append(components.iframe(url));
+            $(selector).on("load", function () {
+                printit(pluginOptions);
+            });
+        } else {
+            $(selector).attr("src", url);
         }
     }
     /*
      * Call the print browser functionnality, focus is needed for IE
      */
-    function printit(){
+    function printit() {
 
-      var selector = 'printPage' + pluginOptions.id;
+        var selector = 'printPage' + pluginOptions.id;
 
-      frames.printPage.focus();
-      frames.printPage.print();
-      if(pluginOptions.showMessage){
-        unloadMessage();
-      }
+        frames[selector].focus();
+        frames[selector].print();
+        if (pluginOptions.showMessage) {
+            unloadMessage();
+        }
 
-      if($.isFunction(pluginOptions.afterCallback))
-      {
-          $.call(this,pluginOptions.afterCallback);
-      }
+        if ($.isFunction(pluginOptions.afterCallback))
+        {
+            $.call(this, pluginOptions.afterCallback);
+        }
 
     }
     /*
      * Hide & Delete the message box with a small delay
      */
-    function unloadMessage(){
-      $("#printMessageBox").delay(1000).animate({opacity:0}, 700, function(){
-        $(this).remove();
-      });
+    function unloadMessage() {
+        $("#printMessageBox").delay(1000).animate({opacity: 0}, 700, function () {
+            $(this).remove();
+        });
     }
     /*
      * Build html compononents for thois plugin
      */
     var components = {
-      iframe: function(url){
-          return '<iframe id="printPage'+pluginOptions.id+'" name="printPage'+pluginOptions.id+'" src='+url+' style="position: absolute; top: -1000px; @media print { display: block; }"></iframe>';
+        iframe: function (url) {
+            return '<iframe id="printPage' + pluginOptions.id + '" name="printPage' + pluginOptions.id + '" src=' + url + ' style="position: absolute; top: -1000px; @media print { display: block; }"></iframe>';
 
-      },
-      messageBox: function(message){
-        return "<div id='printMessageBox' style='\
+        },
+        messageBox: function (message) {
+            return "<div id='printMessageBox' style='\
           position:fixed;\
           top:50%; left:50%;\
           text-align:center;\
@@ -123,8 +132,8 @@
           border: 6px solid #555;\
           border-radius:8px; -webkit-border-radius:8px; -moz-border-radius:8px;\
           box-shadow:0px 0px 10px #888; -webkit-box-shadow:0px 0px 10px #888; -moz-box-shadow:0px 0px 10px #888'>\
-          "+message+"</div>";
-      }
+          " + message + "</div>";
+        }
     };
-  };
-})( jQuery );
+
+})(jQuery);
